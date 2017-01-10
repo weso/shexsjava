@@ -9,6 +9,6 @@ prefix sh: <http://www.w3.org/ns/shacl#>
 :john foaf:name "John Smith" ;
       foaf:mbox <mailto:john@example.org> .
 
-:IssueShape sh:scopeNode :x .
-:UserShape sh:scopeNode :john .
+:IssueShape sh:targetNode :x .
+:UserShape sh:targetNode :john .
 	  
