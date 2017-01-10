@@ -4,34 +4,30 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.logging.Logger;
 
+import es.weso.schema.*;
 import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.rdf.model.Model;
 
 import scala.Option;
 import scala.Tuple2;
 
-import com.hp.hpl.jena.rdf.model.Model;
 
 import es.weso.rdf.PrefixMap;
 import es.weso.rdf.RDFReader;
 import es.weso.rdf.jena.RDFAsJenaModel;
 import es.weso.rdf.nodes.RDFNode;
-import es.weso.rdf.validator.ValidationResult;
-import es.weso.shex.Label;
-import es.weso.shex.Schema;
-import es.weso.shex.ShExMatcher;
-import es.weso.shex.ShExResult;
 
 public class ShExValidator {
 	
 	Logger log = Logger.getLogger(ShExValidator.class.getName());
 
-	public void validate(Model dataModel, Schema schema, PrefixMap pm) throws Exception {
+	public void validate(Model dataModel, Schema schema) throws Exception {
+		Option<String> none = Option.apply(null); // Create a none
 		RDFReader rdf = new RDFAsJenaModel(dataModel);
-		ShExMatcher matcher = new ShExMatcher(schema,rdf);
-		ShExResult result = matcher.validate();
+		Result result = schema.validate(rdf,"TARGETDECLS",none,none, rdf.getPrefixMap(), schema.pm());
 		if (result.isValid()) {
 			log.info("Result is valid");
-			System.out.println("Valid. Result: " + result.show(1,pm));
+			System.out.println("Valid. Result: " + result.show());
 		} else {
 			System.out.println("Not valid");
 		}
@@ -39,27 +35,28 @@ public class ShExValidator {
 
 	public void validate(String dataFile, String schemaFile, String schemaFormat) throws Exception {
 		log.info("Reading data file " + dataFile);
-		Model dataModel =  RDFDataMgr.loadModel(dataFile);
+		Model dataModel = RDFDataMgr.loadModel(dataFile);
+//		Model dataModel =  RDFDataMgr.loadModel(dataFile);
 		log.info("Model read. Size = " + dataModel.size());
 		
 		
 		log.info("Reading shapes file " + schemaFile);
-		Tuple2<Schema,PrefixMap> pair = readSchema(schemaFile,schemaFormat);
+		Schema schema = readSchema(schemaFile,schemaFormat);
 		
-		Schema schema = pair._1();
-		PrefixMap pm = pair._2();
+		log.info("Schema read" + schema.serialize("SHEXC"));
 
-		log.info("Schema read" + schema.show());
-
-		validate(dataModel,schema,pm);
+		validate(dataModel,schema);
 	}
 	
-	public Tuple2<Schema,PrefixMap> readSchema(String schemaFile, String format) throws Exception {
+	public Schema readSchema(String schemaFile, String format) throws Exception {
 		// Create a none, see: http://stackoverflow.com/questions/1997433/how-to-use-scala-none-from-java-code
 		Option<String> none = Option.apply(null); // Create a none
 		
 		String contents = new String(Files.readAllBytes(Paths.get(schemaFile)));
-		
-        return Schema.fromString(contents,format,none).get();
+
+		// This ugly way to call is because the "fromString" method is
+		// declared both in the class and the companion object
+		// I will change it soon
+        return ShExSchema$.MODULE$.fromString(contents,format,none).get();
 	}
 }

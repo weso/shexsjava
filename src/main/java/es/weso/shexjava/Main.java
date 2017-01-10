@@ -12,7 +12,6 @@ import org.joda.time.Period;
 
 import org.joda.time.format.PeriodFormat;
 
-import com.hp.hpl.jena.rdf.model.Model;
 
 
 public class Main {
