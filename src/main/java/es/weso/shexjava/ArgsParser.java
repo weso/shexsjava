@@ -40,7 +40,9 @@ public class ArgsParser {
 		options.addOption("h", "help", NoArg,"show help.");
 		options.addOption("v", "verbose", NoArg,"Verbose mode");
 		options.addOption("p", "processor", WithArg, "Processor: (shex by default)");
+
 		options.addOption("f", "schemaFormat", WithArg, "Schema Format: (SHEXC by default)");
+
 		options.addOption("t", "time", NoArg,"Print processing time at the end");
 	}
 	

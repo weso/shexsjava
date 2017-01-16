@@ -1,11 +1,7 @@
 package es.weso.shexjava;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.logging.Logger;
 
-import org.joda.time.Duration;
 import org.joda.time.Instant;
 import org.joda.time.Period;
 
@@ -28,10 +24,10 @@ public class Main {
 			
 		switch (options.processor) {
 			case "shex":
-				ShExValidator validator = new ShExValidator();
+			case "shaclex":
+				Validator validator = new Validator();
 				log.info("Data: " + options.data + ". Schema: " + options.schema);
-				// ValidationResult result = 
-				validator.validate(options.data,options.schema,options.schemaFormat);
+				validator.validate(options.data, options.schema, options.schemaFormat, options.processor);
 /*				if (result.size() == 0) 
 					System.out.println("Valid");
 				else {
