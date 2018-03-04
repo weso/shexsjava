@@ -56,6 +56,9 @@
 					<configuration>
 						<source>1.8</source>
 						<target>1.8</target>
+						<compilerArgs>
+							<arg>-Xlint:unchecked</arg>
+						</compilerArgs>
 					</configuration>
 				</plugin>
 				<plugin>
@@ -81,7 +84,7 @@
    <dependency> 
     <groupId>es.weso</groupId> 
 	<artifactId>shaclex_2.12</artifactId> 
-	<version>0.0.60</version> 
+	<version>0.0.66</version> 
 	<type>pom</type> 
 	</dependency>
 

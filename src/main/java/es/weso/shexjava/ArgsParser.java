@@ -3,20 +3,24 @@ package es.weso.shexjava;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.apache.commons.cli.CommandLine;
-import org.apache.commons.cli.CommandLineParser;
-import org.apache.commons.cli.DefaultParser;
-import org.apache.commons.cli.HelpFormatter;
-import org.apache.commons.cli.Option;
-import org.apache.commons.cli.Options;
-import org.apache.commons.cli.ParseException;
+import org.apache.commons.cli.*;
 
 public class ArgsParser {
 
 	public String schema = "";
+    static final String schemaAbbr = "s";
+    static final String schemaLong = "schema";
 	public String data = "";
-	public String processor = "shex";
-	public String schemaFormat = "SHEXC";
+    static final String dataAbbr = "d";
+    static final String dataLong = "data";
+    public String shapeMap = "";
+    static final String shapeMapAbbr = "m";
+    static final String shapeMapLong = "shapeMap";
+
+    public String schemaFormat = "SHEXC";
+	public String dataFormat = "Turtle";
+    public String shapeMapFormat = "Compact";
+
 	public Boolean printTime = false;
 	public Boolean verbose = false;
 
@@ -27,21 +31,25 @@ public class ArgsParser {
 	private void createOptions() {
 		Boolean WithArg = true;
 		Boolean NoArg = false;
-		
-		
-		Option schemaOpt = new Option("s", "schema", WithArg, "Schema file or URI");
+
+		Option schemaOpt = new Option(schemaAbbr, schemaLong, WithArg, "Schema file");
 		schemaOpt.setRequired(true);
 		options.addOption(schemaOpt);
 
-		Option dataOpt = new Option("d", "data", WithArg, "Data file or URI");
+		Option dataOpt = new Option(dataAbbr, dataLong, WithArg, "Data file");
 		dataOpt.setRequired(true);
 		options.addOption(dataOpt);
-		
+
+		Option shapeMapOpt = new Option(shapeMapAbbr, shapeMapLong, WithArg, "ShapeMap file");
+		shapeMapOpt.setRequired(true);
+		options.addOption(shapeMapOpt);
+
+
 		options.addOption("h", "help", NoArg,"show help.");
 		options.addOption("v", "verbose", NoArg,"Verbose mode");
-		options.addOption("p", "processor", WithArg, "Processor: (shex by default)");
-
-		options.addOption("f", "schemaFormat", WithArg, "Schema Format: (SHEXC by default)");
+		options.addOption("sf", "schemaFormat", WithArg, "Schema Format: (SHEXC by default)");
+		options.addOption("df", "dataFormat", WithArg, "Data Format: (Turtle by default)");
+		options.addOption("mf", "shapeMapFormat", WithArg, "Shape map format: (Compact by default)");
 
 		options.addOption("t", "time", NoArg,"Print processing time at the end");
 	}
@@ -56,8 +64,15 @@ public class ArgsParser {
 		}
 	}
 
+	String showArgs(String ...args) {
+	    StringBuilder sb = new StringBuilder();
+	    for(int i=0;i<args.length;i++) { sb.append(" " + args[i]);}
+	    return sb.toString();
+    }
+
 	public void parse(String... args) {
-		log.info("Parsing args " + args);
+		log.info("Parsing args " + showArgs(args));
+
 		CommandLineParser parser = new DefaultParser();
 		CommandLine cmd = null;
 		try {
@@ -66,22 +81,30 @@ public class ArgsParser {
 			if (cmd.hasOption("h"))
 				help(options);
 
-			if (cmd.hasOption("s")) {
-				schema = cmd.getOptionValue("s");
+			if (cmd.hasOption(schemaAbbr)) {
+				schema = cmd.getOptionValue(schemaAbbr);
 			}
 
-			if (cmd.hasOption("d")) {
-				data = cmd.getOptionValue("d");
+			if (cmd.hasOption(dataAbbr)) {
+				data = cmd.getOptionValue(dataAbbr);
 			}
 
-			if (cmd.hasOption("p")) {
-				processor = cmd.getOptionValue("p");
+            if (cmd.hasOption(shapeMapAbbr)) {
+                shapeMap = cmd.getOptionValue(shapeMapAbbr);
+            }
+
+			if (cmd.hasOption("sf")) {
+				schemaFormat = cmd.getOptionValue("sf");
 			}
-			
-			if (cmd.hasOption("f")) {
-				schemaFormat = cmd.getOptionValue("f");
-			}
-			
+
+            if (cmd.hasOption("df")) {
+                dataFormat = cmd.getOptionValue("df");
+            }
+
+            if (cmd.hasOption("mf")) {
+                shapeMapFormat = cmd.getOptionValue("mf");
+            }
+
 			if (cmd.hasOption("v")) {
 				verbose = true;
 			}
@@ -91,9 +114,9 @@ public class ArgsParser {
 			}
 			
 		} catch (ParseException e) {
-			log.log(Level.SEVERE, "Failed to parse comand line properties", e);
-			help(options);
-		}
+            log.log(Level.SEVERE, e.getMessage());
+            help(options);
+        }
 		
 	}
 
