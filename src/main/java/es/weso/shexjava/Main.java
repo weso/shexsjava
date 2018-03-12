@@ -2,12 +2,13 @@ package es.weso.shexjava;
 
 import java.util.logging.Logger;
 
+import es.weso.shex.Schema;
 import org.joda.time.Instant;
 import org.joda.time.Period;
 
 
 import org.joda.time.format.PeriodFormat;
-
+import scala.util.Either;
 
 
 public class Main {
@@ -22,10 +23,27 @@ public class Main {
 		isVerbose = options.verbose;
 		Validate validator = new Validate();
 
-		verbose("Data: " + options.data + ". Schema: " + options.schema + ". ShapeMap: " + options.shapeMap);
-		validator.validate(options.data, options.dataFormat,
+		verbose("Data: " + options.data +
+                ". Schema: " + options.schema +
+                ". ShapeMap: " + options.shapeMap
+        );
+
+		Either<String,Result> eitherResult = validator.validate(options.data, options.dataFormat,
                    options.schema, options.schemaFormat,
                    options.shapeMap, options.shapeMapFormat);
+
+		String msg = eitherResult.fold(err -> "Error: " + err,
+          (Result result) -> {
+		    if (options.showSchema) {
+		        String outSchema = Schema.serialize(result.getSchema(), options.outputSchemaFormat).fold(
+		                e -> "Error serializing schema: " + e,
+                        str -> str
+                );
+		        System.out.println(outSchema);
+            }
+		    return result.getResultShapeMap().toJson().spaces2();
+		});
+		System.out.println(msg);
 		Instant end = Instant.now();
 		if (options.printTime) printTime(start,end);
 	}

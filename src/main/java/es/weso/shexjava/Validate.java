@@ -28,31 +28,30 @@ public class Validate {
     // none object is required to pass no base
     Option<String> base = Option.empty();
 
-    public void validate(String dataFile,
+    public Either<String,Result> validate(String dataFile,
                          String dataFormat,
                          String schemaFile,
                          String schemaFormat,
                          String shapeMapFile,
                          String shapeMapFormat) {
-        Either<String, String> either =
-            readRDF(dataFile, dataFormat).flatMap(rdf ->
+     return readRDF(dataFile, dataFormat).flatMap(rdf ->
             FileUtils.getContents(schemaFile).flatMap(schemaStr ->
             Schema.fromString(schemaStr,schemaFormat,base).flatMap(schema ->
             FileUtils.getContents(shapeMapFile).flatMap(shapeMapStr ->
-            ShapeMap.fromString(shapeMapStr.toString(),shapeMapFormat,base,rdf.getPrefixMap(),schema.prefixMap()).flatMap(shapeMap ->
-            ShapeMap.fixShapeMap(shapeMap,rdf,rdf.getPrefixMap(),schema.prefixMap()).flatMap(fixedShapeMap ->
-            Validator.validate(schema,fixedShapeMap,rdf).flatMap(resultShapeMap ->
-             {
-                Either<String,String> result = new Right(resultShapeMap.toJson().spaces2());
-                return result;
-             }
+            ShapeMap.fromString(shapeMapStr.toString(),
+                    shapeMapFormat,
+                    base,
+                    rdf.getPrefixMap(),
+                    schema.prefixMap()).flatMap(shapeMap ->
+            ShapeMap.fixShapeMap(shapeMap,
+                    rdf,
+                    rdf.getPrefixMap(),
+                    schema.prefixMap()).flatMap(fixedShapeMap ->
+            Validator.validate(schema,
+                    fixedShapeMap,
+                    rdf).flatMap(resultShapeMap ->
+              new Right(new Result(schema, rdf, shapeMap, resultShapeMap))
             )))))));
-
-        String msg = either.fold(
-          str -> "Error: " + str,
-          result -> "Result:" + result
-        );
-        System.out.println(msg);
     }
 
     public Either<String, RDFAsJenaModel> readRDF(String fileName, String format) {

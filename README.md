@@ -47,3 +47,10 @@ It is also possible to validate data in other formats, like JSON-LD:
 ```
 java -jar target/shexjava.jar -d examples/wot.lsonld -df JSON-LD -s examples/wot.shex -m examples/wot.shapeMap
 ```
+
+It is also possible to show the schema in different formats with the option `showSchema`. The following example 
+ validates and shows the ShEx schema in Turtle format:
+ 
+```
+java -jar target/shexjava.jar -d examples/issue.ttl -s examples/issue.shex -m examples/issue.shapeMap --showSchema --outSchemaFormat Turtle
+```

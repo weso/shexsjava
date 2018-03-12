@@ -20,9 +20,11 @@ public class ArgsParser {
     public String schemaFormat = "SHEXC";
 	public String dataFormat = "Turtle";
     public String shapeMapFormat = "Compact";
+    public String outputSchemaFormat = "SHEXC" ;
 
 	public Boolean printTime = false;
 	public Boolean verbose = false;
+	public Boolean showSchema = false;
 
 	private static final Logger log = Logger.getLogger(ArgsParser.class.getName());
 	
@@ -48,6 +50,8 @@ public class ArgsParser {
 		options.addOption("h", "help", NoArg,"show help.");
 		options.addOption("v", "verbose", NoArg,"Verbose mode");
 		options.addOption("sf", "schemaFormat", WithArg, "Schema Format: (SHEXC by default)");
+		options.addOption("ss", "showSchema", NoArg, "Show Schema");
+		options.addOption("osf", "outSchemaFormat", WithArg, "Output Schema format");
 		options.addOption("df", "dataFormat", WithArg, "Data Format: (Turtle by default)");
 		options.addOption("mf", "shapeMapFormat", WithArg, "Shape map format: (Compact by default)");
 
@@ -99,6 +103,14 @@ public class ArgsParser {
 
             if (cmd.hasOption("df")) {
                 dataFormat = cmd.getOptionValue("df");
+            }
+
+            if (cmd.hasOption("ss")) {
+                showSchema = true;
+            }
+
+            if (cmd.hasOption("osf")) {
+                outputSchemaFormat = cmd.getOptionValue("osf");
             }
 
             if (cmd.hasOption("mf")) {
