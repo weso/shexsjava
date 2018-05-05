@@ -50,7 +50,7 @@ public class Validate {
             Validator.validate(schema,
                     fixedShapeMap,
                     rdf).flatMap(resultShapeMap ->
-              new Right(new Result(schema, rdf, shapeMap, resultShapeMap))
+              new Right<String,Result>(new Result(schema, rdf, shapeMap, resultShapeMap))
             )))))));
     }
 
@@ -60,9 +60,8 @@ public class Validate {
             File file = Paths.get(fileName).toFile();
             return RDFAsJenaModel.fromFile(file, format, base);
         } catch (Exception e) {
-            return new Left("Error reading file " + fileName + ":" + e.getMessage());
+            return new Left<String,RDFAsJenaModel>("Error reading file " + fileName + ":" + e.getMessage());
         }
     }
-
 
 }

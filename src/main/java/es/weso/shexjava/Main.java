@@ -2,6 +2,8 @@ package es.weso.shexjava;
 
 import java.util.logging.Logger;
 
+import es.weso.rdf.RDFBuilder;
+import es.weso.rdf.jena.RDFAsJenaModel;
 import es.weso.shex.Schema;
 import org.joda.time.Instant;
 import org.joda.time.Period;
@@ -35,7 +37,8 @@ public class Main {
 		String msg = eitherResult.fold(err -> "Error: " + err,
           (Result result) -> {
 		    if (options.showSchema) {
-		        String outSchema = Schema.serialize(result.getSchema(), options.outputSchemaFormat).fold(
+		    	RDFBuilder builder = RDFAsJenaModel.apply().empty();
+		        String outSchema = Schema.serialize(result.getSchema(), options.outputSchemaFormat, builder).fold(
 		                e -> "Error serializing schema: " + e,
                         str -> str
                 );
