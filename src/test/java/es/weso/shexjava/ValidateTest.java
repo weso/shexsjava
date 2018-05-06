@@ -54,4 +54,22 @@ public class ValidateTest {
             Assert.fail("Exception thrown in validateSimple");
         }
     }
+    
+    @Test
+    public void ValidateSimpleBad() {
+        try {
+        	Model rdfModel = ModelFactory.createDefaultModel();
+        	rdfModel.read("data2.ttl");
+        	RDFAsJenaModel rdf = RDFAsJenaModel.apply(rdfModel);
+
+        	Model shaclModel = ModelFactory.createDefaultModel();
+        	shaclModel.read("schema1.ttl");
+        	RDFAsJenaModel shacl = RDFAsJenaModel.apply(shaclModel);
+        	es.weso.schema.Result result = validate(rdf,shacl);
+        	Assert.assertEquals(result.isValid(),false);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Assert.fail("Exception thrown in validateSimple");
+        }
+    }
 }
