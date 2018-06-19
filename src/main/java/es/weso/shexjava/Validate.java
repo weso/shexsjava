@@ -5,6 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.logging.Logger;
 
+import es.weso.rdf.RDFReader;
 import es.weso.shapeMaps.FixedShapeMap;
 import es.weso.shapeMaps.ResultShapeMap;
 import es.weso.shapeMaps.ShapeMap;
@@ -26,7 +27,7 @@ public class Validate {
     Logger log = Logger.getLogger(Validate.class.getName());
 
     // none object is required to pass no base
-    Option<String> base = Option.empty();
+    Option<String> none = Option.empty();
 
     public Either<String,Result> validate(String dataFile,
                          String dataFormat,
@@ -34,13 +35,16 @@ public class Validate {
                          String schemaFormat,
                          String shapeMapFile,
                          String shapeMapFormat) {
+
+     RDFAsJenaModel emptyRDF = RDFAsJenaModel.apply();
+
      return readRDF(dataFile, dataFormat).flatMap(rdf ->
             FileUtils.getContents(schemaFile).flatMap(schemaStr ->
-            Schema.fromString(schemaStr,schemaFormat,base).flatMap(schema ->
+            Schema.fromString(schemaStr,schemaFormat,none, emptyRDF).flatMap(schema ->
             FileUtils.getContents(shapeMapFile).flatMap(shapeMapStr ->
             ShapeMap.fromString(shapeMapStr.toString(),
                     shapeMapFormat,
-                    base,
+                    none,
                     rdf.getPrefixMap(),
                     schema.prefixMap()).flatMap(shapeMap ->
             ShapeMap.fixShapeMap(shapeMap,
@@ -58,7 +62,7 @@ public class Validate {
         try {
             log.info("Reading data file " + fileName);
             File file = Paths.get(fileName).toFile();
-            return RDFAsJenaModel.fromFile(file, format, base);
+            return RDFAsJenaModel.fromFile(file, format, none);
         } catch (Exception e) {
             return new Left<String,RDFAsJenaModel>("Error reading file " + fileName + ":" + e.getMessage());
         }
