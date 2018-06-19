@@ -1,9 +1,19 @@
 shexjava
 ========
 
-ShEx client using Java
+ShEx client using Java.
 
-This repository contains a simple command line Java program that runs the ShEx validator. 
+This repository contains a simple command line Java program that runs the ShEx validator.
+
+The code uses [Maven](https://maven.apache.org/) to manage the project. 
+
+# Run the tests
+
+```
+mvn test
+``` 
+
+
 
 # Create a standalone Jar
 
