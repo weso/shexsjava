@@ -13,14 +13,14 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="Maven: org.scala-lang:scala-library:2.12.6" level="project" />
-    <orderEntry type="library" name="Maven: es.weso:schema_2.12:0.0.91" level="project" />
-    <orderEntry type="library" name="Maven: es.weso:shacl_2.12:0.0.91" level="project" />
+    <orderEntry type="library" name="Maven: es.weso:schema_2.12:0.0.93" level="project" />
+    <orderEntry type="library" name="Maven: es.weso:shacl_2.12:0.0.93" level="project" />
     <orderEntry type="library" name="Maven: com.github.nikita-volkov:sext:0.2.6" level="project" />
     <orderEntry type="library" name="Maven: org.typelevel:cats-core_2.12:1.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.typelevel:machinist_2.12:0.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.typelevel:cats-kernel_2.12:1.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.typelevel:cats-macros_2.12:1.1.0" level="project" />
-    <orderEntry type="library" name="Maven: es.weso:shex_2.12:0.0.91" level="project" />
+    <orderEntry type="library" name="Maven: es.weso:shex_2.12:0.0.93" level="project" />
     <orderEntry type="library" name="Maven: org.antlr:antlr4:4.7.1" level="project" />
     <orderEntry type="library" name="Maven: org.antlr:antlr-runtime:3.5.2" level="project" />
     <orderEntry type="library" name="Maven: org.antlr:ST4:4.0.8" level="project" />
@@ -36,7 +36,7 @@
     <orderEntry type="library" name="Maven: io.circe:circe-parser_2.12:0.9.0" level="project" />
     <orderEntry type="library" name="Maven: io.circe:circe-jawn_2.12:0.9.0" level="project" />
     <orderEntry type="library" name="Maven: org.spire-math:jawn-parser_2.12:0.11.0" level="project" />
-    <orderEntry type="library" name="Maven: es.weso:srdfjena_2.12:0.0.91" level="project" />
+    <orderEntry type="library" name="Maven: es.weso:srdfjena_2.12:0.0.93" level="project" />
     <orderEntry type="library" name="Maven: org.apache.jena:jena-arq:3.6.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.jena:jena-core:3.6.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.jena:jena-iri:3.6.0" level="project" />
@@ -56,7 +56,7 @@
     <orderEntry type="library" name="Maven: org.apache.thrift:libthrift:0.10.0" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.25" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.4" level="project" />
-    <orderEntry type="library" name="Maven: es.weso:srdf4j_2.12:0.0.91" level="project" />
+    <orderEntry type="library" name="Maven: es.weso:srdf4j_2.12:0.0.93" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.rdf4j:rdf4j-runtime:2.2.4" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.rdf4j:rdf4j-model:2.2.4" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.rdf4j:rdf4j-util:2.2.4" level="project" />
@@ -120,21 +120,21 @@
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.eclipse.rdf4j:rdf4j-spin:2.2.4" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.eclipse.rdf4j:rdf4j-queryrender:2.2.4" level="project" />
     <orderEntry type="library" scope="RUNTIME" name="Maven: org.eclipse.rdf4j:rdf4j-sail-nativerdf:2.2.4" level="project" />
-    <orderEntry type="library" name="Maven: es.weso:srdf_2.12:0.0.91" level="project" />
-    <orderEntry type="library" name="Maven: es.weso:utils_2.12:0.0.91" level="project" />
+    <orderEntry type="library" name="Maven: es.weso:srdf_2.12:0.0.93" level="project" />
+    <orderEntry type="library" name="Maven: es.weso:utils_2.12:0.0.93" level="project" />
     <orderEntry type="library" name="Maven: org.atnos:eff_2.12:4.6.1" level="project" />
     <orderEntry type="library" name="Maven: org.gnieh:diffson-circe_2.12:2.2.5" level="project" />
     <orderEntry type="library" name="Maven: org.gnieh:diffson-core_2.12:2.2.5" level="project" />
     <orderEntry type="library" name="Maven: xerces:xercesImpl:2.11.0" level="project" />
     <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.4.01" level="project" />
     <orderEntry type="library" name="Maven: org.apache.commons:commons-text:1.2" level="project" />
-    <orderEntry type="library" name="Maven: es.weso:converter_2.12:0.0.91" level="project" />
-    <orderEntry type="library" name="Maven: es.weso:rbe_2.12:0.0.91" level="project" />
+    <orderEntry type="library" name="Maven: es.weso:converter_2.12:0.0.93" level="project" />
+    <orderEntry type="library" name="Maven: es.weso:rbe_2.12:0.0.93" level="project" />
     <orderEntry type="library" name="Maven: com.github.mpilquist:simulacrum_2.12:0.11.0" level="project" />
-    <orderEntry type="library" name="Maven: es.weso:typing_2.12:0.0.91" level="project" />
-    <orderEntry type="library" name="Maven: es.weso:validating_2.12:0.0.91" level="project" />
-    <orderEntry type="library" name="Maven: es.weso:shapemaps_2.12:0.0.91" level="project" />
-    <orderEntry type="library" name="Maven: es.weso:depgraphs_2.12:0.0.91" level="project" />
+    <orderEntry type="library" name="Maven: es.weso:typing_2.12:0.0.93" level="project" />
+    <orderEntry type="library" name="Maven: es.weso:validating_2.12:0.0.93" level="project" />
+    <orderEntry type="library" name="Maven: es.weso:shapemaps_2.12:0.0.93" level="project" />
+    <orderEntry type="library" name="Maven: es.weso:depgraphs_2.12:0.0.93" level="project" />
     <orderEntry type="library" name="Maven: org.jgrapht:jgrapht-core:1.1.0" level="project" />
     <orderEntry type="library" name="Maven: org.scalactic:scalactic_2.12:3.0.5" level="project" />
     <orderEntry type="library" name="Maven: org.scala-lang:scala-reflect:2.12.4" level="project" />

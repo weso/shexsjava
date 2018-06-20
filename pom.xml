@@ -84,7 +84,7 @@
    <dependency> 
     <groupId>es.weso</groupId> 
 	<artifactId>shaclex_2.12</artifactId> 
-	<version>0.0.91</version>
+	<version>0.0.93</version>
 	<type>pom</type> 
 	</dependency>
 
@@ -219,9 +219,18 @@
 
 
 	<organization>
-		<name>University of Oviedo</name>
-		<url>http://www.uniovi.es</url>
+		<name>WESO Research group</name>
+		<url>http://www.weso.es</url>
 	</organization>
 
 
+	<url>https://github.com/labra/shexjava</url>
+	<description>Demo about using the shaclex library in Java</description>
+	<scm>
+		<url>https://github.com/labra/shexjava.git</url>
+		<developerConnection>Jose Emilio Labra Gayo</developerConnection>
+	</scm>
+	<issueManagement>
+		<url>https://github.com/labra/shexjava/issues</url>
+	</issueManagement>
 </project>
