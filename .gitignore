@@ -27,4 +27,5 @@ project/plugins/project/
 # Idea
 .idea
 .idea_modules
-.iml
+*.iml
+dependency-reduced-pom.xml

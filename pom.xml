@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>es.weso</groupId>
-	<artifactId>shexjava</artifactId>
+	<artifactId>shexsjava</artifactId>
 	<packaging>jar</packaging>
 	<version>1.0</version>
 	<name>shexjava</name>
@@ -14,12 +14,12 @@
 	</properties>
 
 	<build>
-		<finalName>shexjava</finalName>
+		<finalName>shexsjava</finalName>
 		<plugins>
-			<plugin>
+    		<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-shade-plugin</artifactId>
-				<version>2.4.3</version>
+				<version>3.2.3</version>
 				<executions>
 					<execution>
 						<phase>package</phase>
@@ -29,6 +29,14 @@
 						<configuration>
 							<filters>
 								<filter>
+									<artifact>*:*</artifact>
+									<excludes>
+										<exclude>META-INF/*.SF</exclude>
+										<exclude>META-INF/*.DSA</exclude>
+										<exclude>META-INF/*.RSA</exclude>
+									</excludes>
+								</filter>
+								<filter>
 									<includes>
 										<include>lib/**</include>
 									</includes>
@@ -36,11 +44,11 @@
 							</filters>
 
 							<transformers>
-								<transformer
-									implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-									<manifestEntries>
-										<Main-Class>es.weso.shexjava.Main</Main-Class>
-									</manifestEntries>
+								<transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+									<!--<manifestEntries>
+										<Main-Class>es.weso.shexsjava.Main</Main-Class>
+									</manifestEntries> -->
+									<mainClass>es.weso.shexsjava.Main</mainClass>
 								</transformer>
 							</transformers>
 						</configuration>
@@ -51,11 +59,19 @@
 		<pluginManagement>
 			<plugins>
 				<plugin>
+					<groupId>org.codehaus.mojo</groupId>
+					<artifactId>versions-maven-plugin</artifactId>
+					<version>2.5</version>
+					<configuration>
+						<generateBackupPoms>false</generateBackupPoms>
+					</configuration>
+				</plugin>
+				<plugin>
 					<groupId>org.apache.maven.plugins</groupId>
 					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.8.0</version>
 					<configuration>
-						<source>1.8</source>
-						<target>1.8</target>
+						<release>12</release>
 						<compilerArgs>
 							<arg>-Xlint:unchecked</arg>
 						</compilerArgs>
@@ -64,7 +80,7 @@
 				<plugin>
 					<groupId>org.codehaus.mojo</groupId>
 					<artifactId>exec-maven-plugin</artifactId>
-					<version>1.4.0</version>
+					<version>1.6.0</version>
 					<executions>
 						<execution>
 							<goals>
@@ -73,7 +89,7 @@
 						</execution>
 					</executions>
 					<configuration>
-						<mainClass>es.weso.shexjava.Main</mainClass>
+						<mainClass>es.weso.shexsjava.Main</mainClass>
 					</configuration>
 				</plugin>
 			</plugins>
@@ -83,8 +99,8 @@
 	<dependencies>
    <dependency> 
     <groupId>es.weso</groupId> 
-	<artifactId>shaclex_2.12</artifactId> 
-	<version>0.0.93</version>
+	<artifactId>shaclex_2.12</artifactId>
+	<version>0.1.59</version>
 	<type>pom</type> 
 	</dependency>
 
@@ -98,8 +114,8 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 			<version>2.4</version>
-		</dependency> 
-		
+		</dependency>
+
 		<dependency>
 			<groupId>org.assertj</groupId>
 			<artifactId>assertj-core</artifactId>
@@ -153,40 +169,8 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-project-info-reports-plugin</artifactId>
-				<configuration>
-					<dependencyLocationsEnabled>false</dependencyLocationsEnabled>
-					<dependencyDetailsEnabled>false</dependencyDetailsEnabled>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-report-plugin</artifactId>
-				<version>2.13</version>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-checkstyle-plugin</artifactId>
 				<version>2.9.1</version>
-			</plugin>
-
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>2.9</version>
-			</plugin>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>cobertura-maven-plugin</artifactId>
-				<version>2.5.2</version>
-			</plugin>
-
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>findbugs-maven-plugin</artifactId>
-				<version>2.5.2</version>
 			</plugin>
 		</plugins>
 	</reporting>

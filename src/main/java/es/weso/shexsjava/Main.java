@@ -1,16 +1,14 @@
-package es.weso.shexjava;
+package es.weso.shexsjava;
 
 import java.util.logging.Logger;
 
-import es.weso.rdf.RDFBuilder;
-import es.weso.rdf.jena.RDFAsJenaModel;
-import es.weso.shex.Schema;
+import es.weso.shapeMaps.ResultShapeMap;
 import org.joda.time.Instant;
 import org.joda.time.Period;
 
 
 import org.joda.time.format.PeriodFormat;
-import scala.util.Either;
+import cats.effect.IO;
 
 
 public class Main {
@@ -30,23 +28,16 @@ public class Main {
                 ". ShapeMap: " + options.shapeMap
         );
 
-		Either<String,Result> eitherResult = validator.validate(options.data, options.dataFormat,
+		IO<ResultShapeMap> validate = validator.validate(options.data, options.dataFormat,
                    options.schema, options.schemaFormat,
                    options.shapeMap, options.shapeMapFormat);
 
-		String msg = eitherResult.fold(err -> "Error: " + err,
-          (Result result) -> {
-		    if (options.showSchema) {
-		    	RDFBuilder builder = RDFAsJenaModel.apply().empty();
-		        String outSchema = Schema.serialize(result.getSchema(), options.outputSchemaFormat, builder).fold(
-		                e -> "Error serializing schema: " + e,
-                        str -> str
-                );
-		        System.out.println(outSchema);
-            }
-		    return result.getResultShapeMap().toJson().spaces2();
-		});
-		System.out.println(msg);
+		try {
+		 ResultShapeMap result = validate.unsafeRunSync();
+         System.out.println(result.toJson().spaces2());
+		} catch (Exception e) {
+			System.out.println("Exception: " + e.getMessage());
+		}
 		Instant end = Instant.now();
 		if (options.printTime) printTime(start,end);
 	}

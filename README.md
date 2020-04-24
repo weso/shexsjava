@@ -1,7 +1,7 @@
-shexjava
+shexs-java
 ========
 
-ShEx client using Java.
+ShEx-s client using Java.
 
 This repository contains a simple command line Java program that runs the ShEx validator.
 

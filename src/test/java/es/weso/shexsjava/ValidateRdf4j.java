@@ -1,26 +1,7 @@
-package es.weso.shexjava;
-
-import es.weso.rdf.nodes.RDFNode;
-import es.weso.rdf.rdf4j.RDF4jMapper;
-import es.weso.shapeMaps.*;
-import es.weso.shex.ShapeExpr;
-import es.weso.shex.validator.Validator;
-import org.eclipse.rdf4j.model.IRI;
-import org.eclipse.rdf4j.model.Model;
-import org.eclipse.rdf4j.model.ValueFactory;
-import org.eclipse.rdf4j.model.impl.SimpleValueFactory;
-import org.eclipse.rdf4j.model.impl.TreeModel;
-import org.eclipse.rdf4j.model.vocabulary.FOAF;
-import org.eclipse.rdf4j.model.vocabulary.RDF;
-import org.junit.Assert;
-import org.junit.Test;
-import es.weso.rdf.jena.RDFAsJenaModel;
-import es.weso.rdf.rdf4j.RDFAsRDF4jModel;
-import es.weso.shex.Schema;
-import scala.Option;
-import scala.util.Either;
+package es.weso.shexsjava;
 
 public class ValidateRdf4j {
+/*
     private static final Option<String> none = Option.empty();
     private static final RDFAsRDF4jModel emptyRDF = RDFAsRDF4jModel.apply();
     private static final Status Conformant = Conformant$.MODULE$;
@@ -84,5 +65,5 @@ public class ValidateRdf4j {
             e.printStackTrace();
             Assert.fail("Exception thrown in validateSimple");
         }
-    }
+    } */
 }
