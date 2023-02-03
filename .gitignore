@@ -3,6 +3,9 @@
 
 .ensime
 .ensime_cache
+.metals
+.vscode
+.bloop
 
 # sbt specific
 dist/*
