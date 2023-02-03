@@ -97,11 +97,26 @@
 	</build>
 
 	<dependencies>
-   <dependency> 
-    <groupId>es.weso</groupId> 
-	<artifactId>shaclex_2.12</artifactId>
-	<version>0.1.59</version>
-	<type>pom</type> 
+   
+	<dependency> 
+    	<groupId>es.weso</groupId> 
+		<artifactId>shexsjena_2.12</artifactId>
+		<version>0.2.32</version>
+		<type>pom</type> 
+	</dependency>
+
+	<dependency> 
+    	<groupId>es.weso</groupId> 
+		<artifactId>shexs_2.12</artifactId>
+		<version>0.2.32</version>
+		<type>pom</type> 
+	</dependency>
+	
+	<dependency> 
+    	<groupId>es.weso</groupId> 
+		<artifactId>shapemap_2.12</artifactId>
+		<version>0.2.32</version>
+		<type>pom</type> 
 	</dependency>
 
 	<dependency>
@@ -140,12 +155,6 @@
 
 	</dependencies>
 	<repositories>
-		<repository>
-			<id>BintrayJCenter</id>
-			<name>BintrayJCenter</name>
-			<url>https://jcenter.bintray.com/</url>
-			<layout>default</layout>
-		</repository>
 		<repository>
 			<id>sonatypesnapshots</id>
 			<name>sonatype-snapshots</name>

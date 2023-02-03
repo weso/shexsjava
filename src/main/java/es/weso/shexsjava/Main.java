@@ -2,13 +2,13 @@ package es.weso.shexsjava;
 
 import java.util.logging.Logger;
 
-import es.weso.shapeMaps.ResultShapeMap;
 import org.joda.time.Instant;
 import org.joda.time.Period;
 
 
 import org.joda.time.format.PeriodFormat;
 import cats.effect.IO;
+import es.weso.shapemaps.ResultShapeMap;
 
 
 public class Main {
@@ -28,13 +28,9 @@ public class Main {
                 ". ShapeMap: " + options.shapeMap
         );
 
-		IO<ResultShapeMap> validate = validator.validate(options.data, options.dataFormat,
-                   options.schema, options.schemaFormat,
-                   options.shapeMap, options.shapeMapFormat);
-
 		try {
-		 ResultShapeMap result = validate.unsafeRunSync();
-         System.out.println(result.toJson().spaces2());
+		 ResultShapeMap result = validator.validate(options.data, options.dataFormat,options.schema, options.schemaFormat,options.shapeMap, options.shapeMapFormat);
+		 System.out.println(result.toJson().spaces2());
 		} catch (Exception e) {
 			System.out.println("Exception: " + e.getMessage());
 		}

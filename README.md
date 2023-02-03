@@ -1,9 +1,9 @@
 shexs-java
 ========
 
-ShEx-s client using Java.
+Examples of a simple program that runs ShEx-s in Java
 
-This repository contains a simple command line Java program that runs the ShEx validator.
+This repository contains a simple command line Java program that runs the [ShEx-s](https://github.com/weso/shex-s/) library.
 
 The code uses [Maven](https://maven.apache.org/) to manage the project. 
 
@@ -25,15 +25,15 @@ mvn clean compile package
 
 The following line validates a turtle file against a ShEx schema using a shape map. 
 
-```
-java -jar target/shexjava.jar -d examples/issue.ttl -s examples/issue.shex -m examples/issue.shapeMap
+```sh
+java -jar target/shexsjava-1.0-shaded.jar -s examples/issue.shex -d examples/issue.ttl -m examples/issue.shapeMap
 ```
 
 It runs ShEx and validates the nodes according to the shapeMap.
 
 The output is a result shape map (in Json format):
 
-```
+```json
 Result:[
   {
     "node" : "<http://example.org/x>",
@@ -55,12 +55,5 @@ Result:[
 It is also possible to validate data in other formats, like JSON-LD:
 
 ```
-java -jar target/shexjava.jar -d examples/wot.lsonld -df JSON-LD -s examples/wot.shex -m examples/wot.shapeMap
-```
-
-It is also possible to show the schema in different formats with the option `showSchema`. The following example 
- validates and shows the ShEx schema in Turtle format:
- 
-```
-java -jar target/shexjava.jar -d examples/issue.ttl -s examples/issue.shex -m examples/issue.shapeMap --showSchema --outSchemaFormat Turtle
+java -jar target/shexsjava-1.0-shaded.jar -d examples/wot.lsonld -df JSON-LD -s examples/wot.shex -m examples/wot.shapeMap
 ```
