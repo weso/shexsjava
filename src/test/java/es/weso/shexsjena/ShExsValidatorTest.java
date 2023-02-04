@@ -14,11 +14,6 @@ import es.weso.shapemaps.IRILabel;
 
 public class ShExsValidatorTest {
 
- @Test
- public void exampleAddition() {
-    assertEquals(1 + 1, 2);
- }
-
 @Test
  public void exampleValidatorPass() throws URISyntaxException, IOException {
     String schemaStr = 
@@ -80,6 +75,17 @@ public class ShExsValidatorTest {
     IRILabel s = new IRILabel(new IRI(new URI("http://example.org/S")));
     
     assertEquals(false, result.getConformantShapes(x).contains(s));
+ }
+
+ @Test(expected = java.lang.RuntimeException.class)
+ public void exampleValidatorBadSyntax() throws URISyntaxException, IOException {
+    String schemaStr = 
+      "prefix : <http://example.org/>\n" +
+      ":S {\n" +
+      " :p wrong\n" +
+      "}";
+
+    ShExsJenaValidatorBuilder.fromStringSync(schemaStr,"ShExC");
  }
 
 }
